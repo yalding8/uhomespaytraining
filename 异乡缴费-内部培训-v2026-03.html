@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>异乡缴费 — 内部培训</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <link rel="stylesheet" href="fonts/regular/result.css" />
+  <link rel="stylesheet" href="fonts/bold/result.css" />
+  <style>
+    :root {
+      --brand-blue: #1E93FA;
+      --brand-dark: #2C3033;
+      --brand-blue-light: #4BABFF;
+      --brand-blue-dim: rgba(30, 147, 250, 0.15);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --negative: #FF6B6B;
+      --positive: #4ECB71;
+    }
+
+    .reveal {
+      font-family: "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    }
+
+    /* 覆盖 reveal.js 默认背景 */
+    .reveal .slides section {
+      background: var(--brand-dark);
+      color: var(--text-primary);
+    }
+
+    body {
+      background: var(--brand-dark);
+    }
+
+    .reveal .slide-background {
+      background: var(--brand-dark);
+    }
+
+    /* 标题样式 */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: "Alibaba PuHuiTi 3", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .reveal h1 {
+      font-size: 2.8em;
+      text-shadow: none;
+    }
+
+    .reveal h2 {
+      font-size: 2em;
+      margin-bottom: 0.6em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .reveal h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--brand-blue);
+      border-radius: 2px;
+      margin-top: 12px;
+    }
+
+    .reveal p {
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
+
+    /* 封面特殊样式 */
+    .cover-logo {
+      height: 80px;
+      margin-bottom: 30px;
+    }
+
+    .cover-tagline {
+      font-size: 1.4em !important;
+      color: var(--brand-blue) !important;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+    }
+
+    .cover-info {
+      margin-top: 60px;
+      font-size: 0.7em !important;
+      color: var(--text-secondary) !important;
+    }
+
+    /* 卡片样式 */
+    .card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin: 12px 8px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      background: rgba(30, 147, 250, 0.1);
+      border-color: rgba(30, 147, 250, 0.3);
+    }
+
+    .card-icon {
+      font-size: 1.6em;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 0.75em;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* 三栏卡片布局 */
+    .card-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card-row .card {
+      flex: 1;
+      min-width: 260px;
+      max-width: 340px;
+    }
+
+    /* 对比表样式 */
+    .reveal table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 90%;
+      margin: 20px auto;
+      font-size: 0.65em;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .reveal table th {
+      background: var(--brand-blue);
+      color: white;
+      padding: 14px 18px;
+      font-weight: 600;
+      border: none;
+      text-align: center;
+    }
+
+    .reveal table th.col-negative {
+      background: #555;
+    }
+
+    .reveal table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+
+    .reveal table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .reveal table tbody tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .reveal table td.negative {
+      color: var(--negative);
+      opacity: 0.8;
+    }
+
+    .reveal table td.positive {
+      color: var(--positive);
+      font-weight: 500;
+    }
+
+    .reveal table td:first-child {
+      font-weight: 600;
+      color: var(--brand-blue-light);
+      text-align: left;
+    }
+
+    /* 总结语 */
+    .summary {
+      font-size: 1.1em !important;
+      color: var(--brand-blue) !important;
+      font-weight: 600;
+      margin-top: 24px;
+      padding: 16px 24px;
+      background: var(--brand-blue-dim);
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    /* 合作方 logo 墙 */
+    .partner-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .partner-logo {
+      height: 48px;
+      background: white;
+      border-radius: 10px;
+      padding: 10px 18px;
+      object-fit: contain;
+    }
+
+    /* 流程样式 */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.7em;
+      white-space: nowrap;
+    }
+
+    .flow-step.highlight {
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      font-weight: 600;
+    }
+
+    .flow-arrow {
+      color: var(--brand-blue-light);
+      font-size: 0.8em;
+    }
+
+    /* 警告/风险卡片 */
+    .risk-card {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin: 12px auto;
+      font-size: 0.8em;
+      max-width: 800px;
+      text-align: left;
+    }
+
+    .risk-card .risk-title {
+      color: var(--negative);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* 奖励高亮数字 */
+    .highlight-num {
+      color: var(--brand-blue);
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    /* 场景标签 */
+    .scene-label {
+      display: inline-block;
+      background: var(--brand-blue);
+      color: white;
+      border-radius: 6px;
+      padding: 3px 12px;
+      font-size: 0.7em;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    /* 答疑页 */
+    .qa-title {
+      font-size: 3em !important;
+      margin-bottom: 30px !important;
+    }
+
+    .qa-title::after {
+      display: none !important;
+    }
+
+    .qa-contact {
+      font-size: 0.85em !important;
+      color: var(--text-secondary) !important;
+    }
+
+
+    /* 进度条 */
+    .reveal .progress {
+      color: var(--brand-blue);
+      height: 4px;
+    }
+
+    /* slide number */
+    .reveal .slide-number {
+      color: var(--text-secondary);
+      font-size: 14px;
+      background: transparent;
+    }
+
+    /* fragment 动画 */
+    .reveal .fragment {
+      transition: all 0.4s ease;
+    }
+
+    .reveal .fragment.fade-up {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    .reveal .fragment.fade-up.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1 — 封面 -->
+      <section>
+        <img class="cover-logo" src="https://img.uhzcdn.com/static/wxapp/uhomes_pay/new_uhomespay_logo.png" alt="异乡缴费" />
+        <h1>异乡缴费</h1>
+        <p class="cover-tagline">留学缴费 比一比 更省钱</p>
+        <p class="cover-info">培训讲师：Neil Ding &nbsp;|&nbsp; 2026 年 3 月</p>
+      </section>
+
+      <!-- Slide 2 — 平台介绍 -->
+      <section>
+        <h2>平台介绍</h2>
+        <p>异乡缴费是异乡好居旗下专注留学生跨境缴费的支付比价平台</p>
+        <div class="card-row" style="margin-top: 24px;">
+          <div class="card fragment fade-up">
+            <div class="card-icon">🏛️</div>
+            <div class="card-title">官方付款通道</div>
+            <div class="card-desc">与大学/公寓官方收款机构直连</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">💴</div>
+            <div class="card-title">人民币快捷支付</div>
+            <div class="card-desc">支持支付宝、微信等国内主流方式</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">🌐</div>
+            <div class="card-title">不占外汇额度</div>
+            <div class="card-desc">无需购汇，不影响个人外汇额度</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">⚡</div>
+            <div class="card-title">快速到账服务</div>
+            <div class="card-desc">最快 3 小时到账</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3 — 缴费类型 -->
+      <section>
+        <h2>缴费类型</h2>
+        <p>支持三大缴费场景，覆盖留学生核心需求</p>
+        <div class="card-row" style="margin-top: 24px;">
+          <div class="card fragment fade-up">
+            <div class="card-icon">🎓</div>
+            <div class="card-title">学费</div>
+            <div class="card-desc">覆盖全球主要院校，支持多币种缴费</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">🏠</div>
+            <div class="card-title">房租</div>
+            <div class="card-desc">海外租房缴费，安全便捷</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">🛡️</div>
+            <div class="card-title">保险</div>
+            <div class="card-desc">留学保险代缴，省心省力</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4 — 为什么是比价平台 -->
+      <section>
+        <h2>为什么是比价平台</h2>
+        <p>比一比 更省钱 — 为什么是比价平台而不是支付平台？</p>
+        <table>
+          <thead>
+            <tr>
+              <th>对比维度</th>
+              <th class="col-negative">单一支付平台</th>
+              <th class="fragment" data-fragment-index="0" style="visibility: visible;">异乡缴费比价平台</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>选择权</td>
+              <td class="negative">仅一家渠道，无从比较</td>
+              <td class="positive fragment" data-fragment-index="1">多渠道比价，自由选择</td>
+            </tr>
+            <tr>
+              <td>价格透明度</td>
+              <td class="negative">无法比较汇率和费用</td>
+              <td class="positive fragment" data-fragment-index="2">实时汇率对比，费用透明</td>
+            </tr>
+            <tr>
+              <td>手续费</td>
+              <td class="negative">平台说多少就多少</td>
+              <td class="positive fragment" data-fragment-index="3">多平台竞价，费率更低</td>
+            </tr>
+            <tr>
+              <td>合规性</td>
+              <td class="negative">单一平台风控标准不一</td>
+              <td class="positive fragment" data-fragment-index="4">全部持牌合规机构</td>
+            </tr>
+            <tr>
+              <td>风险</td>
+              <td class="negative">单点依赖，出问题无替代</td>
+              <td class="positive fragment" data-fragment-index="5">多通道备份，降低风险</td>
+            </tr>
+            <tr>
+              <td>服务中立性</td>
+              <td class="negative">平台自身利益优先</td>
+              <td class="positive fragment" data-fragment-index="6">中立第三方，用户利益优先</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="summary fragment" data-fragment-index="7">中立第三方顾问，为留学生找到最优方案</p>
+      </section>
+
+      <!-- Slide 5 — 合作机构与合规 -->
+      <section>
+        <h2>合作机构与合规</h2>
+        <p>我们与全球知名持牌金融机构深度合作</p>
+        <div class="partner-grid fragment fade-up">
+          <img class="partner-logo" src="https://img.uhzcdn.com/files/02/74/c3f0a1cd6703303f5f9a0edac3540b12179194.png" alt="Flywire" />
+          <img class="partner-logo" src="https://uhz-images.oss-accelerate.aliyuncs.com/files/16/5d/68aacc93ee94ed913aaa055d09d1e11eb5d98b.png" alt="Convera" />
+          <img class="partner-logo" src="https://img.uhzcdn.com/files/02/33/a0212ce27c5069f13642e199900bfafa108318.png" alt="TransferMate" />
+        </div>
+        <div class="partner-grid fragment fade-up">
+          <img class="partner-logo" src="https://img.uhzcdn.com/files/02/53/5700b6193bd8c38ad09a868e163b13a0f7b02a.jpg" alt="VISA" />
+          <img class="partner-logo" src="https://img.uhzcdn.com/files/52/a2/81a2a352f577778e9a79073217278418dbabf3.png" alt="MasterCard" />
+        </div>
+        <p class="summary fragment fade-up">所有合作方均为持牌合规金融机构，资金安全有保障</p>
+      </section>
+
+      <!-- Slide 6 — 顾问成单流程 -->
+      <section>
+        <h2>顾问成单流程</h2>
+        <div class="fragment fade-up">
+          <p style="text-align:left; font-size:0.75em; color:var(--text-secondary); margin-bottom:6px;">前期流程一</p>
+          <div class="flow">
+            <span class="flow-step">申请</span><span class="flow-arrow">→</span>
+            <span class="flow-step">出合同</span><span class="flow-arrow">→</span>
+            <span class="flow-step highlight">支付定金</span><span class="flow-arrow">→</span>
+            <span class="flow-step">接受合同</span><span class="flow-arrow">→</span>
+            <span class="flow-step">录单</span>
+          </div>
+        </div>
+        <div class="fragment fade-up">
+          <p style="text-align:left; font-size:0.75em; color:var(--text-secondary); margin-bottom:6px; margin-top:16px;">前期流程二</p>
+          <div class="flow">
+            <span class="flow-step">申请</span><span class="flow-arrow">→</span>
+            <span class="flow-step highlight">支付定金</span><span class="flow-arrow">→</span>
+            <span class="flow-step">出合同</span><span class="flow-arrow">→</span>
+            <span class="flow-step">签署</span><span class="flow-arrow">→</span>
+            <span class="flow-step">上传资料</span><span class="flow-arrow">→</span>
+            <span class="flow-step">录单</span>
+          </div>
+        </div>
+        <div class="risk-card fragment fade-up">
+          <div class="risk-title">⚠️ 后期风险</div>
+          未及时提醒 → 客户逾期 → 公寓取消合同 → 客诉 + 扣奖金
+        </div>
+        <div class="fragment fade-up">
+          <p class="summary" style="font-size:0.85em !important;">推荐异乡缴费：效率提升 / 过程可控 / 成单保障</p>
+        </div>
+      </section>
+
+      <!-- Slide 7 — 推荐三大理由 -->
+      <section>
+        <h2>推荐三大理由</h2>
+        <div class="card-row" style="margin-top: 24px;">
+          <div class="card fragment fade-up">
+            <div class="card-icon">🕐</div>
+            <div class="card-title">降低时间成本，促成单</div>
+            <div class="card-desc">签约→缴费→售后闭环，全程无需顾问操心</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">💼</div>
+            <div class="card-title">解决缴费问题，更专业</div>
+            <div class="card-desc">跨境缴费痛点全覆盖，全程代办</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">💰</div>
+            <div class="card-title">促成其他缴费业务，提佣金</div>
+            <div class="card-desc">内部推荐奖励，多推多赚</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8 — 奖励机制 -->
+      <section>
+        <h2>奖励机制</h2>
+        <div class="card-row" style="margin-top: 20px;">
+          <div class="card fragment fade-up">
+            <div class="card-icon">🎓</div>
+            <div class="card-title">学费佣金</div>
+            <div class="card-desc">支付宝 <span class="highlight-num">15-30</span> 元/单<br/>飞汇/Convera <span class="highlight-num">0.03%-0.05%</span></div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">🛡️</div>
+            <div class="card-title">保险佣金</div>
+            <div class="card-desc">澳洲保险 <span class="highlight-num">1%</span><br/>美国替换保险 <span class="highlight-num">50-100</span> 元/单</div>
+          </div>
+          <div class="card fragment fade-up">
+            <div class="card-icon">💱</div>
+            <div class="card-title">汇款阶梯奖励</div>
+            <div class="card-desc">澳洲/香港汇款按月累计</div>
+          </div>
+        </div>
+        <div class="fragment fade-up" style="margin-top: 20px;">
+          <p class="summary" style="font-size:0.9em !important;">计算示例：10 万学费 × 0.03% = <span class="highlight-num" style="font-size:1.3em;">30 元</span> 奖金</p>
+        </div>
+        <p class="fragment fade-up" style="font-size:1em !important; color:var(--brand-blue) !important; font-weight:600; margin-top:16px;">内部同事多多推荐奖励多多！</p>
+      </section>
+
+      <!-- Slide 9 — 内部对接模式 -->
+      <section>
+        <h2>内部对接模式</h2>
+        <div class="fragment fade-up" style="margin-top: 20px;">
+          <p style="text-align:left; margin-bottom:8px;"><span class="scene-label">自动</span><span style="font-size:0.85em;">系统自动产生缴费商机</span></p>
+          <div class="flow">
+            <span class="flow-step">租赁订单</span><span class="flow-arrow">→</span>
+            <span class="flow-step highlight">系统自动产生商机</span><span class="flow-arrow">→</span>
+            <span class="flow-step">分配缴费顾问</span><span class="flow-arrow">→</span>
+            <span class="flow-step">拉群对接</span>
+          </div>
+        </div>
+        <div class="fragment fade-up" style="margin-top: 24px;">
+          <p style="text-align:left; margin-bottom:8px;"><span class="scene-label" style="background:#555;">手动</span><span style="font-size:0.85em;">系统未产生商机时</span></p>
+          <div class="flow">
+            <span class="flow-step">系统未产生商机</span><span class="flow-arrow">→</span>
+            <span class="flow-step highlight">在国家对接群内喊单</span><span class="flow-arrow">→</span>
+            <span class="flow-step">缴费顾问认领</span>
+          </div>
+        </div>
+        <p class="summary fragment fade-up" style="margin-top:28px; font-size:0.85em !important;">近期优化：即将上线 1 对 1 提醒功能</p>
+      </section>
+
+      <!-- Slide 10 — 答疑与结束 -->
+      <section>
+        <img class="cover-logo" src="https://img.uhzcdn.com/static/wxapp/uhomes_pay/new_uhomespay_logo.png" alt="异乡缴费" style="margin-bottom:20px;" />
+        <h2 class="qa-title" style="display:block;">问题答疑</h2>
+        <p class="qa-contact">感谢参加本次培训！如有疑问请随时联系。</p>
+        <p style="margin-top:30px; font-size:0.85em !important; color:var(--text-secondary) !important;">考核环节请前往北森系统完成</p>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      progress: true,
+      center: true,
+      transition: 'fade',
+      transitionSpeed: 'default',
+      width: 1920,
+      height: 1080,
+      margin: 0.08,
+    });
+  </script>
+</body>
+</html>

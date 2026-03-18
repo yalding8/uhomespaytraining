@@ -1,0 +1,17 @@
+{
+  "name": "uhomespay-training",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "cn-font-split": "^7.4.1",
+    "serve": "^14.2.6"
+  },
+  "dependencies": {
+    "@fontpkg/alibaba-puhuiti-3-0": "^0.0.0",
+    "reveal.js": "^5.1.0"
+  }
+}
